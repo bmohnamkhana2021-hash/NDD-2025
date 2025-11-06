@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form  id="ndd">
+        <h2>National Deworming Day 2025</h2>
+        <h3>Round: November, 2025</h3>
+        <hr> 
+        
+        <fieldset>
+            <legend>General Information</legend>
+        <div class="grid">
+            <div class="group">
+                <label for="gp">GP :</label>
+                <select name="gp" id="gp" required>
+                    <option value="">--Select GP--</option>
+                </select>
+            </div>
+            <div class="group">
+                <label for="ru">Reporting Unit :</label>
+                <select name="ru" id="ru" required>                    
+                </select>
+            </div>
+        </div>
+        </fieldset>
+        <fieldset>
+            <legend>Age group wise - Target & Achievement </legend>
+            <div class="grid">
+            <div class="group">
+                <label for="target1"> Target <br><i> (1-2 years old Children):</i></label>
+                <input type="number" name="target1" id="target1" required>
+            </div>
+            <div class="group">
+                <label for="achieve1">Achievement <br><i> (1-2 years old Children)</i>:</label>
+                <input type="number" name="achieve1" id="achieve1" required>
+            </div>
+             <div class="group">
+                <label for="target2">Target <br> <i> (2-19 years old Children):</i></label>
+                <input type="number" name="target2" id="target2" required>
+            </div>
+            <div class="group">
+                <label for="achieve2">Achievement <br><i>(2-19 years old Children)</i> :</label>
+                <input type="number" name="achieve2" id="achieve2" required>
+            </div>
+        </div>
+        </fieldset>
+        <fieldset>
+            <legend>Cumulative Report</legend>
+            <div class="grid1">
+            <div class="group">
+                <label for="targetTotal">Total Target Children:</label>
+                <input type="number" name="targetTotal" id="targetTotal" readonly>
+            </div>
+            <div class="group">
+                <label for="achieveTotal">Total Achievement :</label>
+                <input type="number" name="achieveTotal" id="achieveTotal" readonly>
+            </div>
+            <div class="group">
+                <label for="achievePercent">% of Achievement :</label>
+                <input type="text" name="achievePercent" id="achievePercent" readonly>
+            </div>
+        </div>        
+        </fieldset>
+        <button type="submit" id="button">Submit Report</button>
+        <p id="response"></p>
+        <footer>@developed by Arthita Roy,EA,Namkhana BPMU</footer>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>
