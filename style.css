@@ -10,7 +10,7 @@ body{
     
 }
 form{
-    max-width: 480px;
+    max-width: 550px;
     border: solid 1px coral;
     border-radius: 8px;
     box-shadow: 1px 4px 3px gray;
@@ -104,4 +104,5 @@ footer{
    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
    color: gray;
 }
+
 
