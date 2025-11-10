@@ -83,44 +83,63 @@ ru.diabled=false;
 });
 
 //Submit data to google sheet
-document.getElementById("ndd").addEventListener("submit", async function (e) {
-  e.preventDefault();
+document.getElementById("ndd").addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-  const formData = {
-    gp: document.getElementById("gp").value,
-    ru: document.getElementById("ru").value,
-    target1: document.getElementById("target1").value,
-    achieve1: document.getElementById("achieve1").value,
-    target2: document.getElementById("target2").value,
-    achieve2: document.getElementById("achieve2").value,
-    targetTotal: document.getElementById("targetTotal").value,
-    achieveTotal: document.getElementById("achieveTotal").value,
-    achievePercent:document.getElementById("achievePercent").value,
-  };
+    
+   
+    showMessage("⏳ Submitting your report...", "info");
 
-  const responseEl = document.getElementById("response");
-  responseEl.textContent = "Submitting...";
+    const formData = new FormData(event.target);
+    const url = "https://script.google.com/macros/s/AKfycbws3DMWd0ZgnOOYpgZduccMzt0zWzjLZl4ssvBZ6TAcv3tYmOqt8EnZEHU_IAlureOq/exec";
 
-  try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbws3DMWd0ZgnOOYpgZduccMzt0zWzjLZl4ssvBZ6TAcv3tYmOqt8EnZEHU_IAlureOq/exec", {
-      method: "POST",
-      mode: "no-cors", // important for Google Apps Script
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            body: formData,
+        });
 
-    responseEl.textContent = "✅ Report submitted successfully!";
-    setTimeout(() => {
-  responseEl.textContent = "";
-}, 3000);
-    document.getElementById("ndd").reset();
-  } catch (error) {
-    console.error(error);
-    responseEl.textContent = "❌ Submission failed. Check console for details.";
-    setTimeout(() => {
-  responseEl.textContent = "";
-}, 3000);
-  }
+        if (response.ok) {
+            showMessage("✅ Submitted successfully!", "success");
+            event.target.reset();
+            
+        } else {
+            throw new Error("Server responded with an error");
+        }
+    } catch (error) {
+        showMessage("❌ Submission failed! Please try again.", "error");
+        console.error("Submission error:", error);
+    }
 });
+
+
+// ✅ Modern centered message popup with overlay
+function showMessage(message, type = "info") {
+    // Create overlay
+    let overlay = document.createElement("div");
+    overlay.className = "popup-overlay";
+
+    // Create message box
+    let msgBox = document.createElement("div");
+    msgBox.textContent = message;
+    msgBox.className = `popup-message ${type}`;
+
+    // Add overlay and message box to body
+    overlay.appendChild(msgBox);
+    document.body.appendChild(overlay);
+
+    // Fade-in
+    setTimeout(() => {
+        overlay.classList.add("show");
+        msgBox.classList.add("show");
+    }, 10);
+
+    // Auto remove after 3s
+    setTimeout(() => {
+        msgBox.classList.remove("show");
+        overlay.classList.remove("show");
+        setTimeout(() => overlay.remove(), 500);
+    }, 3000);
+    
+};
+
